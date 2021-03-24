@@ -9,7 +9,7 @@ getPortInfo();
 
 async function getPortInfo() {
     try{
-        const{title, description, install, ussage, lisence, contribute, instructions, github, email} = await inquirer.prompt([
+        const{title, description, install, usage, license, contribute, instructions, github, email} = await inquirer.prompt([
             {
                 message: "What is the title of your project?",
                 name: "title"
@@ -27,10 +27,12 @@ async function getPortInfo() {
                 name:"ussage"
             },
             {
+                type: "list",
                 message: "licence information",
+                choices: ["ISC", "BSD", "MIT"],
                 name: "license"
             },
-            // create list w license info
+         
             {
                 message: "enter contribution guidlines",
                 name: "contribute"
@@ -52,7 +54,52 @@ async function getPortInfo() {
       
       
         ]);
-      let content = ``
+      let content = 
+`# ${title}
+      
+# Description
+      
+${description}
+      
+# Table of Contents 
+      
+* [Instalation](#instalation)
+      
+* [Usage](#usage)
+      
+* [License](#license)
+      
+* [Contributing](#contributing)
+      
+* [Tests](#tests)
+      
+* [Questions](#questions)
+      
+      
+# Instalation 
+      
+${install}
+      
+# Usage 
+      
+${usage}
+      
+# License 
+      
+${license}
+      
+# Contributing 
+      
+${contribute}
+      
+# Tests
+      
+${instructions}
+      
+# Questions
+For further queestions please contact me at
+${github}
+${email}`
         // await writeFileAsync("index.html", content, "utf8");
         await fs.writeFile("readme.md", content, function(err){
             if (err){
